@@ -1,6 +1,6 @@
 const DbConnection = require('../db/database');
 
-const sortByName = async () => {
+exports.sortByName = async () => {
     let query = 'SELECT * FROM User';
     const getDbData = await DbConnection(query);
     const unSortedArray = [];
@@ -15,6 +15,11 @@ const sortByName = async () => {
     // console.log(a);
 }
 
+exports.fetchByUserId = async (id) => {
+    const userDetails = await this.sortByName();
+    return userDetails.find(obj => obj.id === id);
+}
+
 const compare = (a, b) => {
     const nameA = a.name.toUpperCase();
     const nameB = b.name.toUpperCase();
@@ -22,4 +27,4 @@ const compare = (a, b) => {
     return comparison;
 }
 //sortByName();
-module.exports = sortByName;
+//module.exports = sortByName;

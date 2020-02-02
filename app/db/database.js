@@ -10,7 +10,7 @@ const executeQuery = async (dbQuery) => {
         return dbResponse;
         
     } catch(err){
-        throw err;
+        return err;
     } finally {
         if(conn) conn.release();
     }

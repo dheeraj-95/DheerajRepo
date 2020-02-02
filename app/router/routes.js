@@ -3,8 +3,24 @@ const router = express.Router();
 const DbController = require('../controller/dbController');
 
 router.get('/sort', async (req, res) => {
-    const result = await DbController();
-    res.json({status : 1, message : result});
+    const result = await DbController.sortByName();
+
+    if(!result){
+        res.status(400).json({status : 0, message : 'Cannot sort results now.'});
+    } else{
+        res.json({status : 1, message : result});
+    }
+})
+
+router.get('/findUser/:userid', async(req, res) => {
+    let userId = parseInt(req.params.userid);
+    const result = await DbController.fetchByUserId(userId);
+
+    if(userId !== null && result){
+        res.json({status : 1, message : result});
+    } else {
+        res.status(400).json({status : 0, message : 'user Id doesnot exists.'});
+    }
 })
 
 module.exports = router;

@@ -28,7 +28,7 @@ exports.fetchByUserId = async (id) => {
 
 exports.verifyUser = async(email, pass) => {
     const getDbData = await dbData();
-    const user = getDbData.find(obj => (obj.email === email && obj.password === pass));
+    const user = getDbData.find(obj => (obj.email.toUpperCase() === email.toUpperCase() && obj.password === pass));
     if(user){
         delete user.password;
         return user;
